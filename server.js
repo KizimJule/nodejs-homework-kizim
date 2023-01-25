@@ -1,5 +1,18 @@
-const app = require('./app')
+require('dotenv').config();
 
-app.listen(3000, () => {
-  console.log("Server running. Use our API on port: 3000")
-})
+const mongoose = require('mongoose').set('strictQuery', true);
+
+const { MONGO_URL, PORT = 3000 } = process.env;
+const app = require('./src/app');
+
+mongoose
+  .connect(MONGO_URL)
+  .then(() => {
+    app.listen(PORT, function () {
+      console.log(`Database connection successful`);
+    });
+  })
+  .catch(err => {
+    console.log(`Server not running. Error message: ${err.message}`);
+    process.exit(1);
+  });
