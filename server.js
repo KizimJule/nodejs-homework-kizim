@@ -6,7 +6,7 @@ const { MONGO_URL, PORT = 3000 } = process.env;
 const app = require('./src/app');
 
 mongoose
-  .connect(MONGO_URL)
+  .connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(PORT, function () {
       console.log(`Database connection successful`);
