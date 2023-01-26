@@ -1,15 +1,9 @@
-const { Contact } = require('../../models');
-const ObjectId = require('mongodb').ObjectId;
+const contactsServices = require('../../services');
 
 const getContactById = async (req, res) => {
   const { contactId } = req.params;
-  const contactById = await Contact.find({ _id: ObjectId(contactId) });
 
-  if (!contactById.length) {
-    const error = new Error(`contact by id=${contactId} not found`);
-    error.status = 404;
-    throw error;
-  }
+  const contactById = await contactsServices.getContactByIdServices(contactId);
 
   res.json({
     message: `contact by id=${contactId}`,
