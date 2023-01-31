@@ -1,5 +1,4 @@
-const contactsServices = require('../../services');
-console.log(contactsServices.updateContactServices);
+const contactsServices = require('../../services/contactsServices');
 
 const updateContact = async (req, res) => {
   const { name, email, phone } = req.body;
