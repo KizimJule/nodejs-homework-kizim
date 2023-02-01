@@ -1,16 +1,21 @@
 // const contactsServices = require('../../services');
-const { User } = require('../../models');
+const { User } = require('../../models/user');
 
 const updateSubscription = async (req, res) => {
   const { subscription } = req.body;
   const { id } = req.params;
 
-  // const result = await contactsServices.updateStatusContactServices(favorite, contactId);
   if (subscription === undefined) {
-    const error = new Error(`missing field favorite`);
+    const error = new Error(`missing field "subscription"`);
     error.status = 400;
     throw error;
   }
+
+  // if (subscription !== 'pro' || subscription !== 'starter' || subscription !== 'business') {
+  //   const error = new Error(`field "subscription" must be:'pro', 'starter' or 'business'`);
+  //   error.status = 400;
+  //   throw error;
+  // }
 
   const result = await User.findByIdAndUpdate({ _id: id }, { subscription }, { new: true });
 

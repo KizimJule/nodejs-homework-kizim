@@ -1,4 +1,4 @@
-const contactsServices = require('../../services');
+const { contactsServices } = require('../../services');
 
 const updateStatusContact = async (req, res) => {
   const { favorite } = req.body;
