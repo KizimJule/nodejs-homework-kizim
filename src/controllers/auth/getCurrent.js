@@ -1,7 +1,7 @@
 const authServices = require('../../services/authServices');
 const { Unauthorized } = require('http-errors');
 
-const getCurrentServices = async (req, res) => {
+const getCurrent = async (req, res) => {
   const id = req.user.id;
 
   const user = await authServices.getUserById(id);
@@ -21,4 +21,4 @@ const getCurrentServices = async (req, res) => {
   });
 };
 
-module.exports = getCurrentServices;
+module.exports = getCurrent;

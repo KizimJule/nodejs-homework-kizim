@@ -1,4 +1,4 @@
-const { Contact } = require('../../models');
+const { Contact } = require('../../models/contact');
 
 const updateStatusContactServices = async (favorite, contactId) => {
   if (favorite === undefined) {

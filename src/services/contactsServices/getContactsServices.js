@@ -1,17 +1,17 @@
-const { Contact } = require('../../models');
+const { Contact } = require('../../models/contact');
 
-const getContactsServices = async (_id, skip, limit) => {
-  // const contacts = await Contact.find({});
+const getContactsServices = async (owner, settings) => {
+  const { page, limit, favorite } = settings;
+  const skip = (page - 1) * limit;
 
-  const contacts = await Contact.find({ owner: _id }, '', {
-    skip,
-    limit: Number(limit),
-  })
-    .populate('owner', '_id email')
-    .select({
-      updatedAt: 0,
-      createdAt: 0,
-    });
+  const query = { owner };
+
+  if (typeof favorite === 'boolean') query.favorite = favorite;
+
+  const contacts = await Contact.find(query, '-createdAt -updatedAt', { skip, limit }).populate(
+    'owner',
+    '_id email'
+  );
 
   return contacts;
 };
