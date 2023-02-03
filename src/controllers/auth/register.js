@@ -8,7 +8,13 @@ const register = async (req, res) => {
   res.status(200).json({
     message: `create new user `,
     code: 200,
-    data: { newUser: { email: newUser.email, subscription: newUser.subscription } },
+    data: {
+      newUser: {
+        email: newUser.email,
+        subscription: newUser.subscription,
+        avatarUrl: newUser.avatarUrl,
+      },
+    },
   });
 };
 
