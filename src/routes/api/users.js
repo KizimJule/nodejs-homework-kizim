@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { auth: ctrl } = require('../../controllers');
 const { ctrlWrapper, validation, auth, upload } = require('../../middlewares/');
-const { joiSchema, updateSubscriptionSchema } = require('../../models/user');
+const { joiSchema, updateSubscriptionSchema, verifyEmailSchema } = require('../../models/user');
 
 router.post('/signup', validation(joiSchema), ctrlWrapper(ctrl.register));
 
@@ -12,6 +12,8 @@ router.post('/login', validation(joiSchema), ctrlWrapper(ctrl.login));
 router.get('/current', auth, ctrlWrapper(ctrl.getCurrent));
 
 router.get('/verify/:verificationToken', ctrlWrapper(ctrl.verifyEmail));
+
+router.post('/verify/', validation(verifyEmailSchema), ctrlWrapper(ctrl.resendVerifyEmail));
 
 router.get('/logout', auth, ctrlWrapper(ctrl.logout));
 
