@@ -52,14 +52,13 @@ const joiSchema = Joi.object({
   subscription: Joi.string(),
   token: Joi.string(),
 });
-// const joiLoginSchema = Joi.object({
-//   password: Joi.string().required(),
-//   email: Joi.string().required(),
-// });
+const verifyEmailSchema = Joi.object({
+  email: Joi.string().required(),
+});
 
 const updateSubscriptionSchema = Joi.object({
   subscription: Joi.string().valid('starter', 'pro', 'business').required(),
 });
 const User = model('user', userSchema);
 
-module.exports = { User, joiSchema, updateSubscriptionSchema };
+module.exports = { User, joiSchema, updateSubscriptionSchema, verifyEmailSchema };
